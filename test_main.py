@@ -3,8 +3,10 @@ import pandas as pd
 from main import *
 
 def test_join_and_filter():
-    assert(df_boston.shape == (2, 2))
+    assert(df_boston.shape == (2, 3))
     assert(list(df_boston['firstName']) == ['Julie', 'Steve'])
+    assert(list(df_boston['lastName']) == ['Firrelli', 'Patterson'])
+    assert(list(df_boston['jobTitle']) == ['Sales Rep', 'Sales Rep'])
     assert(df_zero_emp.shape[0] == 0)
 
 def test_type_of_join():
