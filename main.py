@@ -11,7 +11,7 @@ conn = sqlite3.connect(Path(__file__).with_name('data.sqlite'))
 
 # STEP 1
 df_boston = pd.read_sql("""
-    SELECT e.firstName, e.lastName, e.jobTitle
+    SELECT e.firstName, e.lastName
     FROM employees AS e
     JOIN offices AS o ON e.officeCode = o.officeCode
     WHERE o.city = 'Boston'
@@ -23,7 +23,8 @@ df_zero_emp = pd.read_sql("""
     SELECT o.*
     FROM offices AS o
     LEFT JOIN employees AS e ON o.officeCode = e.officeCode
-    WHERE e.employeeNumber IS NULL
+    GROUP BY o.officeCode
+    HAVING COUNT(e.employeeNumber) = 0
 """, conn)
 
 # STEP 3
